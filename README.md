@@ -101,3 +101,31 @@ Descrição: Ao inspecionar um objeto no mundo ou no inventário, o sistema deve
 Testes:
  * Teste 1: Instanciar um Item e preencher seus atributos via métodos Set.
  * Teste 2: Solicitar GetPrice() do item. (Esperado: O retorno deve ser um objeto válido da classe Money).
+
+
+Tarefa ID: TSK-012
+História de Usuário (US04 - Consulta de Saldo e Moeda)
+
+Descrição: Como jogador (Player), quero poder consultar o meu saldo financeiro atual e o tipo de moeda que possuo, para saber o meu poder de compra antes de iniciar uma negociação. O sistema deve aceder a GetMoney() da entidade e, a partir do objeto Money devolvido, invocar GetValue() e GetCoin() para apresentar no ecrã o montante (BigDecimal) e o tipo de moeda (GOLD, SILVER ou BRONZE).
+Testes:
+ * Teste 1: Invocar GetMoney() num jogador com fundos previamente definidos. (Esperado: Retorno de um objeto Money válido).
+ * Teste 2: Invocar GetValue() e GetCoin() nesse objeto. (Esperado: Retorno do valor exato em BigDecimal e do enumerador correto).
+
+
+Tarefa ID: TSK-013
+Regra de Negócio (RN06 - Verificação em Lote no Inventário)
+
+Descrição: A classe Inventory possui o método FindItem(List<Item>) : List<Item>. A regra determina que este método deve ser utilizado em mecânicas que exijam validação de múltiplos itens em simultâneo (como na preparação de uma Trade com vários objetos). O método deve comparar a lista passada como parâmetro com a lista interna de slots : List<Item> e devolver uma sublista contendo apenas as correspondências exatas encontradas no inventário.
+Testes:
+ * Teste 1: Passar uma lista de 3 itens para FindItem(List<Item>), sabendo que apenas 2 estão nos slots. (Esperado: O método devolve uma List<Item> contendo apenas os 2 itens presentes).
+ * Teste 2: Passar uma lista de itens onde nenhum existe no inventário. (Esperado: O sistema devolve uma lista vazia).
+
+
+Tarefa ID: TSK-014
+Caso de Uso (UC04 - Carregamento de Dados de Entidades)
+
+Descrição: Antes de instanciar a classe Trade, o sistema deve preparar o ambiente de negociação lendo as informações de perfil e posse das entidades. O sistema deve invocar os métodos básicos de leitura de Player e NPC — especificamente GetId(), GetName() e GetInventory() — para identificar unicamente quem está a interagir (long), apresentar os nomes na interface (string) e disponibilizar o acesso aos respetivos inventários (Inventory) para a seleção de objetos a transacionar.
+Testes:
+ * Teste 1: Acionar GetName() na instância do Player e do NPC. (Esperado: Devolução correta das strings com os respetivos nomes).
+ * Teste 2: Acionar GetInventory() na instância de ambos. (Esperado: Devolução de um objeto Inventory válido que contenha a lista de slots).
+
